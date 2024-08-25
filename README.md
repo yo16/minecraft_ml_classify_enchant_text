@@ -1,0 +1,2 @@
+# minecraft_ml_classify_enchant_text
+Minecraftのエンチャントの本の文字列を、機械学習で判定する
