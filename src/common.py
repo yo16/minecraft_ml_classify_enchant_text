@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import json
 
 
 # 画像ファイルの前処理
@@ -18,3 +19,15 @@ def pre_process_image(img_path: str) -> np.ndarray:
     cv2.imwrite("./tmp/img_new.png", img_new)
     
     return img_new.flatten()
+
+DATA_MAP_FILE = "./data/data_map.json"
+# ファイル名をjsonファイルから探してレベルを返す
+# 毎回jsonファイルを開くけど、、、まぁ多くないからいいや
+def get_level(filename: str) -> int:
+    with open(DATA_MAP_FILE, mode="r", encoding="utf-8") as f:
+        data_map = json.load(f)
+    for file_info in data_map["data"]:
+        if file_info["file_name"] == filename:
+            # みつけた
+            return file_info["level"]
+    return -1

@@ -1,25 +1,11 @@
 import os
 import numpy as np
 import cv2
-import json
 import pickle
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
 
-from common import pre_process_image
-
-
-DATA_MAP_FILE = "./data/data_map.json"
-# ファイル名をjsonファイルから探してレベルを返す
-# 毎回jsonファイルを開くけど、、、まぁ多くないからいいや
-def get_level(filename: str) -> int:
-    with open(DATA_MAP_FILE, mode="r", encoding="utf-8") as f:
-        data_map = json.load(f)
-    for file_info in data_map["data"]:
-        if file_info["file_name"] == filename:
-            # みつけた
-            return file_info["level"]
-    return -1
+from common import pre_process_image, get_level
 
 
 # 学習ファイルを読む
